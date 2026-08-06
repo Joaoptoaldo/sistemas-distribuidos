@@ -1,3 +1,9 @@
+vscode/
 .vscode
+pycache/
+*.pyc
+*.pyo
+*.pyd
 .class
+*.class
 .DS_Store

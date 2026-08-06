@@ -1,3 +1,3 @@
 # Sistemas Distribuídos  
 
-Repositório contendo o conteudo teórico e prático de sistemas distribuidos 
+Repositório contendo o conteúdo teórico e prático dos Sistemas Distribuídos.
