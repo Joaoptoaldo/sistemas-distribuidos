@@ -1,5 +1,3 @@
-package threads.java;
-
 class MinhaPrimeiraThread extends Thread {
 
     private int quantidade;
