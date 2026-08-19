@@ -5,8 +5,8 @@
     - c) Exiba as listas respectivamente
 
     Observação:
-        - Implemente threads para as operações de ler/popular arquivo (fique atento se não seria necessário 2 métodos)
-        - Implemente threads para as operações de exibir listas
+      - Implemente threads para as operações de ler/popular arquivo (fique   atento se não seria necessário 2 métodos)
+      - Implemente threads para as operações de exibir listas
 
 
 
