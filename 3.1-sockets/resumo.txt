@@ -1,0 +1,10 @@
+Sockets são canais de comunicação que permitem a troca de dados entre processos.
+Eles funcionam como portas lógicas de rede em um sistema operacional.
+Permitem que aplicações conversem no mesmo computador ou através da Internet.
+Funcionam principalmente com dois protocolos de transporte: o TCP e o UDP.
+O TCP oferece uma conexão confiável e orientada a fluxo de bytes (como a web).
+O UDP foca em velocidade, enviando pacotes individuais sem garantir a entrega.
+A comunicação exige um endereço IP (destino) e um número de porta (serviço).
+Em uma arquitetura clássica, temos um socket servidor e um socket cliente.
+O servidor fica ouvindo uma porta e o cliente inicia o pedido de conexão.
+Após o estabelecimento do canal, ambos os lados podem ler e escrever dados.
