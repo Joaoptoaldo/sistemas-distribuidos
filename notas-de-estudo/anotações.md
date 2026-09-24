@@ -137,4 +137,46 @@ Sockets
 
     - Método write/OUTPUT (escrever algum dado no socket -> enviando)
 
-    - Método close (fechar a conexão)
+---
+
+23/09/2026
+
+- O que passa num socket?
+    - Dados binários (bytes) 
+    - Objetos (serializados)
+    - Dados de qualquer tipo (texto, imagem, vídeo, etc.)
+    - Não importa o que seja, mas sim a forma como é enviado e recebido
+    
+- Socket = baixo nivel 
+    - Alocar
+    - Manipular
+
+- Trafego = comunicação/operação
+    - Escrita/write/output
+    - Leitura/read/input
+
+- Server
+    - Cria socket
+    - Bind (IP + porta)
+    - Listen (aguarda requisição)
+    - Accept (aceita requisição)
+    - Read (recebe dados)
+    - Write (envia dados)
+
+- Client
+    - Cria socket
+    - Connect (conecta com o servidor)
+    - Write (envia dados)
+    - Read (recebe dados)
+
+            Server
+
+            Comunicador
+
+                // métodos de comunicação
+                - receberMsgTcp
+                - receberObjTcp
+                - enviarMsgTcp
+                - enviarObjTcp
+    
+ 
