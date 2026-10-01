@@ -1,0 +1,23 @@
+Models
+    Dados do cliente e informações recebidas
+
+Views
+    Interface gráfica
+
+Controllers
+    Coordena as ações da interface e a comunicação
+
+Comunicacao
+    Classe Comunicador responsável pelo UDP
+
+
+
+Models
+    Pessoa
+    Token
+
+Controllers
+    Recebem as requisições e aplicam as regras
+
+Comunicacao
+    Classe Comunicador responsável pelo UDP

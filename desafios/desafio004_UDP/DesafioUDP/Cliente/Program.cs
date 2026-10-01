@@ -1,0 +1,14 @@
+﻿using Cliente.Views;
+
+namespace Cliente;
+
+internal static class Program
+{
+    [STAThread]
+    static void Main()
+    {
+        ApplicationConfiguration.Initialize();
+
+        Application.Run(new CadastroView());
+    }
+}
