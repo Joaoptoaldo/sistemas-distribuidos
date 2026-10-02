@@ -1,4 +1,5 @@
 <Solution>
+	<Project Path="Comunicador\Comunicador.csproj" />
 	<Project Path="Cliente\Cliente.csproj" />
 	<Project Path="Servidor\Servidor.csproj" />
 </Solution>

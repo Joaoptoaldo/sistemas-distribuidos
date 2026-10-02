@@ -1,14 +1,12 @@
-﻿using Servidor.Comunicacao;
+using Comunicador;
 using Servidor.Controllers;
-using System.Net.Sockets;
 
-const int porta = 5000;
-
-using Comunicador comunicador = new(porta);
+// Classe Comunicador (exigida pelo desafio) — modo servidor: bind na porta
+using var comunicador = new Comunicador.Comunicador(Protocolo.PortaServidor);
 
 ServidorController controller = new();
 
-Console.WriteLine($"Servidor UDP aguardando na porta {porta}...");
+Console.WriteLine($"Servidor UDP aguardando na porta {Protocolo.PortaServidor}...");
 
 while (true)
 {
@@ -31,7 +29,7 @@ while (true)
             resultado.Remetente
         );
     }
-    catch (SocketException ex)
+    catch (System.Net.Sockets.SocketException ex)
     {
         Console.WriteLine($"Erro de comunicação UDP: {ex.Message}");
     }

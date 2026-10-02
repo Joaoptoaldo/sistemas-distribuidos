@@ -1,9 +1,11 @@
+using Comunicador;
 using Servidor.Models;
 
 namespace Servidor.Controllers;
 
 /// <summary>
-/// Processa as operações recebidas pelo servidor e mantém os cadastros e o token atual
+/// Processa as operações recebidas pelo servidor e mantém os cadastros e o token atual.
+/// Interpreta o protocolo definido em <see cref="Protocolo"/> — não conhece sockets.
 /// </summary>
 public class ServidorController
 {
@@ -23,12 +25,14 @@ public class ServidorController
             return "ERRO: Mensagem inválida.";
         }
 
-        string[] partes = mensagem.Split('|');
+        string[] partes = mensagem.Split(Protocolo.SeparadorCampos);
 
         return partes[0] switch
         {
-            "CADASTRO" => ProcessarCadastro(partes),
-            "TOKEN" => SolicitarToken(),
+            Protocolo.ComandoCadastro => ProcessarCadastro(partes),
+            // TOKEN é válido apenas na forma exata "TOKEN" (sem campos extras)
+            Protocolo.ComandoToken when partes.Length == 1 => SolicitarToken(),
+            Protocolo.ComandoToken => "ERRO: Mensagem inválida.",
             _ => "ERRO: Operação desconhecida."
         };
     }
@@ -71,7 +75,7 @@ public class ServidorController
 
         _pessoas.Add(pessoa);
 
-        return "SUCESSO: Pessoa cadastrada.";
+        return $"{Protocolo.PrefixoSucesso}: Pessoa cadastrada.";
     }
 
     /// <summary>
@@ -85,6 +89,6 @@ public class ServidorController
             _tokenAtual = new Token();
         }
 
-        return $"TOKEN|{_tokenAtual.Valor}";
+        return $"{Protocolo.PrefixoToken}{_tokenAtual.Valor}";
     }
 }

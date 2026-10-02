@@ -1,4 +1,4 @@
-﻿using Cliente.Views;
+using Cliente.Views;
 
 namespace Cliente;
 
