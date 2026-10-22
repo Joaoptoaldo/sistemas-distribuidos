@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "GeraPessoa.Contracts";
+
+service GeraPessoaService {
+  rpc GerarPessoa (PessoaRequest) returns (PessoaResponse);
+}
+
+message PessoaRequest {
+  string nome = 1;
+  string cpf = 2;
+}
+
+message PessoaResponse {
+  string cpf = 1;
+  string nome = 2;
+  string email = 3;
+}

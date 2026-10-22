@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="PersonGrpc.Client/PersonGrpc.Client.csproj" />
+  <Project Path="PersonGrpc.Contracts/PersonGrpc.Contracts.csproj" />
+  <Project Path="PersonGrpc.Server/PersonGrpc.Server.csproj" />
+</Solution>
