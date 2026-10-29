@@ -1,0 +1,15 @@
+MULTICAST
+    - comunicação em grupo através de um endereço virtual (classe D no modelo TCP/IP)
+    - modos de transmissão: unicast (um para um), multicast (um para o grupo), broadcast (um para todos)
+    - baseado no protocolo UDP e com roteamento específico para o grupo
+    - arquitetura clássica ponto-a-ponto devido ao conceito de grupo (restrito a membros)
+    - exige conexão simultânea e online dos participantes
+
+
+SISTEMAS DISTRIBUÍDOS
+    - Sistemas voltados para o compartilhamento de recursos entre máquinas
+    - Funcionamento baseado em três arquiteturas principais: 
+        - Cliente-Servidor
+        - Ponto-a-ponto
+        - Híbridas
+
