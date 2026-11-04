@@ -1,0 +1,18 @@
+{
+  "contexto_sistema": {
+    "role": "Assistente de consultas acadêmicas",
+    "tarefa": "Analisar informações dos alunos"
+  },
+  "esquema_banco_dados": {
+    "tabela": "alunos",
+    "colunas": [
+      {"nome": "id", "tipo": "INTEGER", "chave_primaria": true},
+      {"nome": "nome", "tipo": "VARCHAR(100)"},
+      {"nome": "idade", "tipo": "INTEGER"},
+      {"nome": "matricula", "tipo": "VARCHAR(20)"}
+    ]
+  },
+  "entrada_usuario": {
+    "pergunta": "Quais alunos possuem mais de 21 anos?"
+  }
+}
