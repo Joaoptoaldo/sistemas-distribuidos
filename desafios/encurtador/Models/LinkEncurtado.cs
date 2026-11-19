@@ -6,11 +6,13 @@ public sealed class LinkEncurtado
     public Uri UrlOriginal { get; }
     public DateTimeOffset CriadoEm { get; }
 
-    // construtor que inicializa um link encurtado com o código, a URL original e a data de criação
-    public LinkEncurtado(string codigo, Uri urlOriginal)
+    public LinkEncurtado(
+        string codigo,
+        Uri urlOriginal,
+        DateTimeOffset? criadoEm = null)
     {
         Codigo = codigo;
         UrlOriginal = urlOriginal;
-        CriadoEm = DateTimeOffset.UtcNow;
+        CriadoEm = criadoEm ?? DateTimeOffset.UtcNow;
     }
 }

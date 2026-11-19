@@ -1,25 +1,51 @@
-
 using Encurtador.Models;
+using Encurtador.Repositories;
 
 namespace Encurtador.Services;
 
 public class EncurtadorService
-{   
-    // dois dicionários para armazenar os links encurtados e os códigos por URL
-    private readonly Dictionary<string, LinkEncurtado> _links = new();
+{
+    private readonly LinkEncurtidoRepositorio _repositorio;
 
-    private readonly Dictionary<string, string> _codigosPorUrl = new();
+    public List<LinkEncurtado> ListarTodos()
+    {
+        return _repositorio.ListarTodos();
+    }
 
-    // metodo que cria um link encurtado a partir de uma URL original
+    public bool Excluir(string codigo)
+    {
+        if (string.IsNullOrWhiteSpace(codigo))
+            return false;
+
+        return _repositorio.ExcluirPorCodigo(codigo);
+    }
+
+    public EncurtadorService()
+        : this(new LinkEncurtidoRepositorio())
+    {
+    }
+
+    public EncurtadorService(
+        LinkEncurtidoRepositorio repositorio)
+    {
+        _repositorio = repositorio
+            ?? throw new ArgumentNullException(nameof(repositorio));
+    }
+
+    // Cria um link encurtado ou recupera um já existente.
     public LinkEncurtado Criar(Uri urlOriginal)
     {
+        ArgumentNullException.ThrowIfNull(urlOriginal);
+
         string chaveUrl = urlOriginal.AbsoluteUri;
 
-        // verifica se a URL já foi cadastrada
-        if (_codigosPorUrl.TryGetValue(chaveUrl, out string? codigoExistente))
-        {
-            return _links[codigoExistente];
-        }
+        // Verifica se a URL já está cadastrada.
+        var linkExistente = _repositorio.ObterPorUrlOriginal(
+            chaveUrl
+        );
+
+        if (linkExistente is not null)
+            return linkExistente;
 
         const int maxTentativas = 5;
 
@@ -27,14 +53,25 @@ public class EncurtadorService
         {
             string codigo = GeradorCodigo.Gerar();
 
-            var link = new LinkEncurtado(codigo, urlOriginal);
+            var link = new LinkEncurtado(
+                codigo,
+                urlOriginal
+            );
 
-            if (_links.TryAdd(codigo, link))
-            {
-                _codigosPorUrl.Add(chaveUrl, codigo);
-
+            if (_repositorio.TentarInserir(link))
                 return link;
-            }
+
+            // Se outra operação cadastrou a mesma URL,
+            // reutiliza o registro existente.
+            linkExistente = _repositorio.ObterPorUrlOriginal(
+                chaveUrl
+            );
+
+            if (linkExistente is not null)
+                return linkExistente;
+
+            // Se não existe a URL, houve colisão de código.
+            // A próxima tentativa gerará outro código.
         }
 
         throw new InvalidOperationException(
@@ -42,20 +79,19 @@ public class EncurtadorService
         );
     }
 
-    // metodo que tenta buscar um link encurtado pelo código
+    // Busca um link pelo código.
     public bool TentarBuscar(
         string codigo,
-        out LinkEncurtado? link
-    )
-
+        out LinkEncurtado? link)
     {
-        return _links.TryGetValue(codigo, out link);
+        link = _repositorio.ObterPorCodigo(codigo);
+
+        return link is not null;
     }
 
-    // método que obtém a URL encurtada a partir de um link encurtado
+    // Obtém a URL encurtada.
     public string ObterUrlEncurtada(LinkEncurtado link)
     {
         return $"http://localhost:5000/{link.Codigo}";
     }
-
 }
